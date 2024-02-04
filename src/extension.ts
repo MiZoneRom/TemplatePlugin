@@ -17,14 +17,14 @@ export function deactivate() { }
 
 const useExtension = async (args: any) => {
 	try {
-		const path = vscode.workspace.rootPath;
+		const path = vscode.workspace.workspaceFolders;
 
-		if (!path) {
+		if (!path || path.length <= 0) {
 			vscode.window.showErrorMessage('请先打开一个工作区!');
 			return;
 		}
 
-		const text = await vscode.window.showInputBox({ title: '请输入文件名称' });
+		const text = await vscode.window.showInputBox({ title: '请输入文件名称', prompt: '文件名将会作为组件名称创建' });
 
 		if (!text) {
 			return;

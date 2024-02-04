@@ -1,7 +1,7 @@
 {
-  "name": "demo",
-  "displayName": "Template",
-  "description": "Template",
+  "name": "template_plugin",
+  "displayName": "项目模板",
+  "description": "项目模板",
   "version": "0.0.1",
   "engines": {
     "vscode": "^1.86.0"
@@ -15,7 +15,7 @@
     "commands": [
       {
         "command": "template.create-template",
-        "title": "创建Page"
+        "title": "创建 View"
       }
     ],
     "menus": {
