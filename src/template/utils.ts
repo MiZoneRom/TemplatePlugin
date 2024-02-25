@@ -75,7 +75,7 @@ export const getTemplates = () => {
     .get<Array<FileTemplate>>("Templates");
 
   if (!customCommitType || customCommitType.length <= 0) {
-    return [defaultTemplate];
+    return defaultTemplate;
   }
 
   return customCommitType;
@@ -101,8 +101,6 @@ export const getFileName = async () => {
 export const getTemplate = () => {
   return new Promise<FileTemplate | undefined>((reslove, reject) => {
     const templates = getTemplates();
-
-    console.info(templates);
 
     const quickPick = vscode.window.createQuickPick();
     quickPick.title = "请选择模板";

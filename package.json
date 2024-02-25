@@ -14,21 +14,22 @@
   "contributes": {
     "commands": [
       {
-        "command": "project.create-template",
-        "title": "创建 View"
+        "command": "projectPlugin.createTemplate",
+        "title": "创建 View",
+        "icon": "$(browser)"
       },
       {
-        "command": "project.showGitCommit",
-        "title": "%project.showGitCommit.title%",
-        "placeholer": "%project.showGitCommit.placeholder%",
+        "command": "projectPlugin.showGitCommit",
+        "title": "%projectPlugin.showGitCommit.title%",
+        "placeholer": "%projectPlugin.showGitCommit.placeholder%",
         "icon": "$(comment-discussion)"
       }
     ],
     "configuration": {
       "type": "object",
-      "title": "Template Plugin",
+      "title": "项目插件设置",
       "properties": {
-        "Files.Templates": {
+        "ProjectPlugin.FileTemplates": {
           "type": "array",
           "default": [],
           "markdownDescription": "%extension.configuration.ProjectPlugin.Files.Templates%",
@@ -82,7 +83,7 @@
     "menus": {
       "explorer/context": [
         {
-          "command": "project.create-template",
+          "command": "projectPlugin.createTemplate",
           "group": "navigation",
           "when": "explorerResourceIsFolder"
         }
@@ -90,7 +91,7 @@
       "scm/title": [
         {
           "when": "scmProvider == git",
-          "command": "project.showGitCommit",
+          "command": "projectPlugin.showGitCommit",
           "group": "navigation"
         }
       ]

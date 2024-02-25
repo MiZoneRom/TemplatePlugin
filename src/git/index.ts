@@ -145,7 +145,7 @@ export async function useGitCommit(context: vscode.ExtensionContext) {
   // 递归输入信息 Recursive input message
   const recursiveInputMessage = (startMessageInput?: () => void) => {
     CommitDetailQuickPickOptions.placeHolder = localize(
-      "project.showGitCommit.description.placeholder"
+      "projectPlugin.showGitCommit.description.placeholder"
     );
 
     const _CommitDetailType: Array<CommitDetailType> = JSON.parse(
@@ -188,7 +188,7 @@ export async function useGitCommit(context: vscode.ExtensionContext) {
   //开始输入 Start input
   const startMessageInput = () => {
     CommitDetailQuickPickOptions.placeHolder = localize(
-      "project.showGitCommit.placeholder"
+      "projectPlugin.showGitCommit.placeholder"
     );
 
     vscode.window
@@ -209,7 +209,7 @@ export async function useGitCommit(context: vscode.ExtensionContext) {
   //选择commit 提交的模板
   const SelectTemplate = () => {
     CommitDetailQuickPickOptions.placeHolder = localize(
-      "project.showGitCommit.selectTemplate.placeholder"
+      "projectPlugin.showGitCommit.selectTemplate.placeholder"
     );
     vscode.window
       .showQuickPick(CommitTemplate, CommitDetailQuickPickOptions)
@@ -226,7 +226,7 @@ export async function useGitCommit(context: vscode.ExtensionContext) {
   };
   //点击图标触发快捷选项 Click the icon to trigger shortcut options
   let disposable = vscode.commands.registerCommand(
-    "project.showGitCommit",
+    "projectPlugin.showGitCommit",
     (uri?) => {
       if (uri) {
         //如果有多个repo 寻找当前的 进行填充 If there are multiple repos looking for the current to populate

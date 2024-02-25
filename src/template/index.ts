@@ -11,7 +11,7 @@ export * from "./types";
 
 export const useTemplate = (context: vscode.ExtensionContext) => {
   let disposable = vscode.commands.registerCommand(
-    "project.create-template",
+    "projectPlugin.createTemplate",
     (args) => {
       useExtension(args);
     }

@@ -1,8 +1,9 @@
 {
-    "project.showGitCommit.title": "show git commit template",
-    "project.showGitCommit.placeholder": "Search Git Commit Type",
-    "project.showGitCommit.description.placeholder": "Search Commit Description",
-    "project.showGitCommit.selectTemplate.placeholder": "Select the template to submit for use",
+    "projectPlugin.showGitCommit.title": "show git commit template",
+    "projectPlugin.showGitCommit.placeholder": "Search Git Commit Type",
+    "projectPlugin.showGitCommit.description.placeholder": "Search Commit Description",
+    "projectPlugin.showGitCommit.selectTemplate.placeholder": "Select the template to submit for use",
+    "extension.configuration.ProjectPlugin.Files.Templates": "Custom Templates",
     "extension.configuration.ProjectPlugin.ShowEmoji.markdownDescription": "Show or not show `Emoji` icons",
     "extension.configuration.ProjectPlugin.CustomCommitType.markdownDescription": "Add custom `Git Commit Type`",
     "extension.configuration.ProjectPlugin.ProjectPlugin.MaxSubjectCharacters": "Set the valid length of **Subject**, default `20` characters",

@@ -1,8 +1,9 @@
 {
-    "project.showGitCommit.title": "show git commit template",
-    "project.showGitCommit.placeholder": "コミットタイプの検索",
-    "project.showGitCommit.description.placeholder": "コミット詳細の検索",
-    "project.showGitCommit.selectTemplate.placeholder": "使用するコミットテンプレートを選択",
+    "projectPlugin.showGitCommit.title": "show git commit template",
+    "projectPlugin.showGitCommit.placeholder": "コミットタイプの検索",
+    "projectPlugin.showGitCommit.description.placeholder": "コミット詳細の検索",
+    "projectPlugin.showGitCommit.selectTemplate.placeholder": "使用するコミットテンプレートを選択",
+    "extension.configuration.ProjectPlugin.Files.Templates": "絵文字アイコンを表示するかどうか制御します。",
     "extension.configuration.ProjectPlugin.ShowEmoji.markdownDescription": "絵文字アイコンを表示するかどうか制御します。",
     "extension.configuration.ProjectPlugin.CustomCommitType.markdownDescription": "独自の`Git Commit Type`を構成します。",
     "extension.configuration.ProjectPlugin.ProjectPlugin.MaxSubjectCharacters": "有効な **Subject** の文字数を制御します。デフォルト値 `20`",

@@ -1,8 +1,9 @@
 {
-    "project.showGitCommit.title": "show git commit template",
-    "project.showGitCommit.placeholder": "搜索提交类型",
-    "project.showGitCommit.description.placeholder": "搜索提交描述",
-    "project.showGitCommit.selectTemplate.placeholder": "选择提交使用的模板",
+    "projectPlugin.showGitCommit.title": "显示 Git 提交模板",
+    "projectPlugin.showGitCommit.placeholder": "搜索提交类型",
+    "projectPlugin.showGitCommit.description.placeholder": "搜索提交描述",
+    "projectPlugin.showGitCommit.selectTemplate.placeholder": "选择提交使用的模板",
+    "extension.configuration.ProjectPlugin.Files.Templates": "自定义文件模板",
     "extension.configuration.ProjectPlugin.ShowEmoji.markdownDescription": "是否展现 `Emoji` 图标",
     "extension.configuration.ProjectPlugin.CustomCommitType.markdownDescription": "自定义添加 `Git Commit Type`",
     "extension.configuration.ProjectPlugin.ProjectPlugin.MaxSubjectCharacters": "设置 **Subject** 的有效长度，默认 `20` 字符",
