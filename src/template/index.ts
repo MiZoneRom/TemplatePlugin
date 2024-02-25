@@ -1,71 +1,55 @@
-import { FileTemplate } from "../types";
+import * as vscode from "vscode";
+import {
+  createFiles,
+  getFileName,
+  getIsPublicView,
+  getTemplate,
+} from "./utils";
 
-const vueFile = {
-  fileName: `{{fileName}}.vue`,
-  fileContent: `<template>
-  {{fileName}}
-</template>
-<script lang="ts">
-import { defineView } from '@kmsoft/upf-core'
-import { {{fileName}}PropOptions } from './interface'
-import {{fileName}}ViewModel from './{{fileName}}ViewModel'
+export * from "./utils";
+export * from "./types";
 
-export default defineView({
-  name: '{{fileName}}',
-  props: {{fileName}}PropOptions,
-  viewModel: {{fileName}}ViewModel,
-  data() {}
-})
-</script>
-`,
+export const useTemplate = (context: vscode.ExtensionContext) => {
+  let disposable = vscode.commands.registerCommand(
+    "project.create-template",
+    (args) => {
+      useExtension(args);
+    }
+  );
+
+  context.subscriptions.push(disposable);
 };
 
-const vueModelFile = {
-  fileName: `{{fileName}}ViewModel.ts`,
-  fileContent: `import { BaseViewModel } from '@kmsoft/upf-core'
-  import { I{{fileName}}EventEmits, I{{fileName}}State, {{fileName}}PropType } from './interface'
-  
-  /** 导航管理 */
-  export default class {{fileName}}ViewModel extends BaseViewModel<I{{fileName}}State, I{{fileName}}EventEmits, {{fileName}}PropType> {
-    /** 加载完成函数 */
-    viewDidMount() {}
+const useExtension = async (args: any) => {
+  const path = vscode.workspace.workspaceFolders;
+
+  if (!path || path.length <= 0) {
+    vscode.window.showErrorMessage("请先打开一个工作区!");
+    return;
   }
-  `,
+
+  // 文件夹路径
+  const selectPath = args.fsPath;
+
+  /** 获取模板类型 */
+  const template = await getTemplate();
+
+  if (!template) {
+    return;
+  }
+
+  /** 文件名 */
+  const fileName = await getFileName();
+
+  if (!fileName) {
+    return;
+  }
+
+  const isPublic = await getIsPublicView();
+
+  if (isPublic == undefined) {
+    return;
+  }
+
+  createFiles(selectPath, fileName, isPublic, template);
 };
-
-const interfaceFile = {
-  fileName: `interface.ts`,
-  fileContent: `import { IBaseViewEventEmits, BaseViewOptions, ViewPropsTypeExtract, VuePropTypes } from '@kmsoft/upf-core'
-
-/** {{fileName}} 状态 **/
-export interface I{{fileName}}State {}
-
-/** {{fileName}} 事件 **/
-export interface I{{fileName}}EventEmits extends IBaseViewEventEmits {}
-
-/** {{fileName}} 参数 **/
-export const {{fileName}}PropOptions = {
-  ...BaseViewOptions
-}
-
-/** {{fileName}} 参数类型 **/
-export type {{fileName}}PropType = ViewPropsTypeExtract<typeof {{fileName}}PropOptions>
-`,
-};
-
-const indexFile = {
-  fileName: `index.ts`,
-  fileContent: `import { connect } from '@kmsoft/upf-core'
-import {{fileName}} from './{{fileName}}.vue'
-import {{fileName}}ViewModel from './{{fileName}}ViewModel'
-
-export default connect({{fileName}}, {{fileName}}ViewModel)
-`,
-};
-
-const template: FileTemplate = {
-  templateName: "默认模板",
-  files: [vueFile, vueModelFile, interfaceFile, indexFile],
-};
-
-export default template;

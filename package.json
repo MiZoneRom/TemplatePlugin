@@ -1,7 +1,7 @@
 {
-  "name": "template-plugin",
-  "displayName": "项目模板",
-  "description": "项目模板",
+  "name": "project-plugin",
+  "displayName": "项目插件",
+  "description": "项目插件",
   "version": "0.0.1",
   "engines": {
     "vscode": "^1.86.0"
@@ -14,8 +14,14 @@
   "contributes": {
     "commands": [
       {
-        "command": "template.create-template",
+        "command": "project.create-template",
         "title": "创建 View"
+      },
+      {
+        "command": "project.showGitCommit",
+        "title": "%project.showGitCommit.title%",
+        "placeholer": "%project.showGitCommit.placeholder%",
+        "icon": "$(comment-discussion)"
       }
     ],
     "configuration": {
@@ -25,12 +31,49 @@
         "Files.Templates": {
           "type": "array",
           "default": [],
-          "markdownDescription": "%extension.configuration.TemplatePlugin.Files.Templates%",
+          "markdownDescription": "%extension.configuration.ProjectPlugin.Files.Templates%",
           "items": [
             {
               "templateName": "默认模板",
               "fileName": "Test.txt",
               "fileContent": "{{fileName}}"
+            }
+          ]
+        },
+        "ProjectPlugin.ShowEmoji": {
+          "type": "boolean",
+          "default": true,
+          "markdownDescription": "%extension.configuration.ProjectPlugin.ShowEmoji.markdownDescription%"
+        },
+        "ProjectPlugin.CustomCommitType": {
+          "type": "array",
+          "default": [],
+          "items": {
+            "type": [
+              "object",
+              "string"
+            ]
+          },
+          "markdownDescription": "%extension.configuration.ProjectPlugin.CustomCommitType.markdownDescription%",
+          "scope": "resource"
+        },
+        "ProjectPlugin.MaxSubjectCharacters": {
+          "type": "number",
+          "default": 20,
+          "markdownDescription": "%extension.configuration.ProjectPlugin.ProjectPlugin.MaxSubjectCharacters%"
+        },
+        "ProjectPlugin.Templates": {
+          "type": "array",
+          "default": [],
+          "markdownDescription": "%extension.configuration.ProjectPlugin.ProjectPlugin.Templates%",
+          "items": [
+            {
+              "templateName": "Angular",
+              "templateContent": "<icon><space><type>(<scope>):<space><subject><enter><body><enter><footer>"
+            },
+            {
+              "templateName": "git-cz",
+              "templateContent": "<type>(<scope>):<space><icon><space><subject><enter><body><enter><footer>"
             }
           ]
         }
@@ -39,9 +82,16 @@
     "menus": {
       "explorer/context": [
         {
-          "command": "template.create-template",
+          "command": "project.create-template",
           "group": "navigation",
           "when": "explorerResourceIsFolder"
+        }
+      ],
+      "scm/title": [
+        {
+          "when": "scmProvider == git",
+          "command": "project.showGitCommit",
+          "group": "navigation"
         }
       ]
     }
@@ -70,5 +120,9 @@
     "typescript": "^5.3.3",
     "webpack": "^5.90.0",
     "webpack-cli": "^5.1.4"
+  },
+  "dependencies": {
+    "vsce": "^1.95.0",
+    "vscode-nls-i18n": "^0.2.4"
   }
 }
