@@ -27,7 +27,7 @@ export default defineView({
     fileContent: `import { BaseViewModel, ViewModelOptions } from '@kmsoft/upf-core'
 import { {{fileName}}EmitsType, {{fileName}}PropType } from './interface'
 
-/** 导航管理 */
+/** {{fileName}} */
 export default class {{fileName}}ViewModel extends BaseViewModel<{{fileName}}EmitsType, {{fileName}}PropType> {
   constructor(options: ViewModelOptions<{{fileName}}PropType>) {
     super(options)
@@ -76,6 +76,9 @@ const {{fileName}} = connect({{fileName}}View, {{fileName}}ViewModel)
 
 export default withInstall({{fileName}})
 export { {{fileName}}, {{fileName}}View, {{fileName}}ViewModel }
+
+// 模板生成文件
+// export * from './{{folderName}}'
 `,
   };
 
@@ -107,7 +110,7 @@ export default defineExtendView({
     fileContent: `import { BaseViewModel } from '@kmsoft/upf-core'
 import { {{fileName}}EmitsType, {{fileName}}PropType } from './interface'
 
-/** 导航管理 */
+/** {{fileName}} */
 export default class {{fileName}}ViewModel extends BaseViewModel<{{fileName}}EmitsType, {{fileName}}PropType> {
   /** 加载完成函数 */
   viewDidMount() {}

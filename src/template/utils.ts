@@ -37,10 +37,9 @@ export const createFiles = (
       /** 文件名称 */
       const finalFileName = preFix + fileName;
       /** 本地文件名称 */
-      const localFileName = iterator.fileName.replaceAll(
-        "{{fileName}}",
-        finalFileName
-      );
+      const localFileName = iterator.fileName
+        .replaceAll("{{fileName}}", finalFileName)
+        .replaceAll("{{folderName}}", folderName);
       /** 创建路径 */
       const indexjsPath = `${folderPath}/${localFileName}`;
 
