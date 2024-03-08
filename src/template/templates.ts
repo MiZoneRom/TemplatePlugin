@@ -4,64 +4,79 @@ const getDefaultView = () => {
   const vueFile = {
     fileName: `{{fileName}}.vue`,
     fileContent: `<template>
-    {{fileName}}
-  </template>
-  <script lang="ts">
-  import { defineView } from '@kmsoft/upf-core'
-  import { {{fileName}}PropOptions } from './interface'
-  import {{fileName}}ViewModel from './{{fileName}}ViewModel'
-  
-  export default defineView({
-    name: '{{fileName}}',
-    props: {{fileName}}PropOptions,
-    viewModel: {{fileName}}ViewModel,
-    data() {}
-  })
-  </script>
-  `,
+  {{fileName}}
+</template>
+<script lang="ts">
+import { defineView } from '@kmsoft/upf-core'
+import { {{fileName}}PropOptions, {{fileName}}EventEmits } from './interface'
+import {{fileName}}ViewModel from './{{fileName}}ViewModel'
+
+export default defineView({
+  name: '{{fileName}}',
+  props: {{fileName}}PropOptions,
+  emits: {{fileName}}EventEmits,
+  viewModel: {{fileName}}ViewModel,
+  setup(props, { emit, slots, attrs, vm }) {}
+})
+</script>
+`,
   };
 
   const vueModelFile = {
     fileName: `{{fileName}}ViewModel.ts`,
-    fileContent: `import { BaseViewModel } from '@kmsoft/upf-core'
-    import { I{{fileName}}EventEmits, I{{fileName}}State, {{fileName}}PropType } from './interface'
-    
-    /** 导航管理 */
-    export default class {{fileName}}ViewModel extends BaseViewModel<I{{fileName}}State, I{{fileName}}EventEmits, {{fileName}}PropType> {
-      /** 加载完成函数 */
-      viewDidMount() {}
-    }
-    `,
+    fileContent: `import { BaseViewModel, ViewModelOptions } from '@kmsoft/upf-core'
+import { {{fileName}}EmitsType, {{fileName}}PropType } from './interface'
+
+/** 导航管理 */
+export default class {{fileName}}ViewModel extends BaseViewModel<{{fileName}}EmitsType, {{fileName}}PropType> {
+  constructor(options: ViewModelOptions<{{fileName}}PropType>) {
+    super(options)
+  }
+
+  viewDidMount() {}
+}
+`,
   };
 
   const interfaceFile = {
     fileName: `interface.ts`,
-    fileContent: `import { IBaseViewEventEmits, BaseViewOptions, ViewPropsTypeExtract, VuePropTypes } from '@kmsoft/upf-core'
-  
-  /** {{fileName}} 状态 **/
-  export interface I{{fileName}}State {}
-  
-  /** {{fileName}} 事件 **/
-  export interface I{{fileName}}EventEmits extends IBaseViewEventEmits {}
-  
-  /** {{fileName}} 参数 **/
-  export const {{fileName}}PropOptions = {
-    ...BaseViewOptions
-  }
-  
-  /** {{fileName}} 参数类型 **/
-  export type {{fileName}}PropType = ViewPropsTypeExtract<typeof {{fileName}}PropOptions>
-  `,
+    fileContent: `import {
+  BaseViewPropOptions,
+  BaseViewEventEmits,
+  ViewEmitsTypeExtract,
+  ViewPropsTypeExtract,
+  VuePropTypes
+} from '@kmsoft/upf-core'
+
+/** 参数 **/
+export const {{fileName}}PropOptions = {
+  ...BaseViewPropOptions
+}
+
+/** 参数类型 **/
+export type {{fileName}}PropType = ViewPropsTypeExtract<typeof {{fileName}}PropOptions>
+
+/** 事件 */
+export const {{fileName}}EventEmits = {
+  ...BaseViewEventEmits
+}
+
+/** 事件类型 **/
+export type {{fileName}}EmitsType = ViewEmitsTypeExtract<typeof {{fileName}}EventEmits>
+`,
   };
 
   const indexFile = {
     fileName: `index.ts`,
-    fileContent: `import { connect } from '@kmsoft/upf-core'
-  import {{fileName}} from './{{fileName}}.vue'
-  import {{fileName}}ViewModel from './{{fileName}}ViewModel'
-  
-  export default connect({{fileName}}, {{fileName}}ViewModel)
-  `,
+    fileContent: `import { connect, withInstall } from '@kmsoft/upf-core'
+import {{fileName}}View from './{{fileName}}.vue'
+import {{fileName}}ViewModel from './{{fileName}}ViewModel'
+
+const {{fileName}} = connect({{fileName}}View, {{fileName}}ViewModel)
+
+export default withInstall({{fileName}})
+export { {{fileName}}, {{fileName}}View, {{fileName}}ViewModel }
+`,
   };
 
   const defaultView: FileTemplate = {
@@ -74,60 +89,71 @@ const getDefaultView = () => {
 
 const getExtendView = () => {
   const vueFile = {
-    fileName: `{{fileName}}.ts`,
+    fileName: `{{fileName}}.tsx`,
     fileContent: `import { defineExtendView, KTreeView } from '@kmsoft/upf-core'
-import { {{fileName}}PropOptions } from './interface'
+import { {{fileName}}PropOptions, {{fileName}}EventEmits } from './interface'
 
 export default defineExtendView({
   name: '{{fileName}}',
   props: {{fileName}}PropOptions,
-  emits: {},
-  view: {{fileName}}
+  emits: {{fileName}}EventEmits,
+  parent: KTreeView
 })
-  `,
+`,
   };
 
   const vueModelFile = {
     fileName: `{{fileName}}ViewModel.ts`,
     fileContent: `import { BaseViewModel } from '@kmsoft/upf-core'
-    import { I{{fileName}}EventEmits, I{{fileName}}State, {{fileName}}PropType } from './interface'
-    
-    /** 导航管理 */
-    export default class {{fileName}}ViewModel extends BaseViewModel<I{{fileName}}State, I{{fileName}}EventEmits, {{fileName}}PropType> {
-      /** 加载完成函数 */
-      viewDidMount() {}
-    }
-    `,
+import { {{fileName}}EmitsType, {{fileName}}PropType } from './interface'
+
+/** 导航管理 */
+export default class {{fileName}}ViewModel extends BaseViewModel<{{fileName}}EmitsType, {{fileName}}PropType> {
+  /** 加载完成函数 */
+  viewDidMount() {}
+}
+`,
   };
 
   const interfaceFile = {
     fileName: `interface.ts`,
-    fileContent: `import { IBaseViewEventEmits, BaseViewOptions, ViewPropsTypeExtract, VuePropTypes } from '@kmsoft/upf-core'
-  
-  /** {{fileName}} 状态 **/
-  export interface I{{fileName}}State {}
-  
-  /** {{fileName}} 事件 **/
-  export interface I{{fileName}}EventEmits extends IBaseViewEventEmits {}
-  
-  /** {{fileName}} 参数 **/
-  export const {{fileName}}PropOptions = {
-    ...BaseViewOptions
-  }
-  
-  /** {{fileName}} 参数类型 **/
-  export type {{fileName}}PropType = ViewPropsTypeExtract<typeof {{fileName}}PropOptions>
-  `,
+    fileContent: `import {
+  KTreeViewPropOptions,
+  KTreeViewEventEmits,
+  ViewEmitsTypeExtract,
+  ViewPropsTypeExtract,
+  VuePropTypes
+} from '@kmsoft/upf-core'
+
+/** 参数 **/
+export const {{fileName}}PropOptions = {
+  ...KTreeViewPropOptions
+}
+
+/** 参数类型 **/
+export type {{fileName}}PropType = ViewPropsTypeExtract<typeof {{fileName}}PropOptions>
+
+/** 事件 */
+export const {{fileName}}EventEmits = {
+  ...KTreeViewEventEmits
+}
+
+/** 事件类型 **/
+export type {{fileName}}EmitsType = ViewEmitsTypeExtract<typeof {{fileName}}EventEmits>
+`,
   };
 
   const indexFile = {
     fileName: `index.ts`,
-    fileContent: `import { connect } from '@kmsoft/upf-core'
-  import {{fileName}} from './{{fileName}}.vue'
-  import {{fileName}}ViewModel from './{{fileName}}ViewModel'
-  
-  export default connect({{fileName}}, {{fileName}}ViewModel)
-  `,
+    fileContent: `import { connect, withInstall } from '@kmsoft/upf-core'
+import {{fileName}}View from './{{fileName}}.vue'
+import {{fileName}}ViewModel from './{{fileName}}ViewModel'
+
+const {{fileName}} = connect({{fileName}}View, {{fileName}}ViewModel)
+
+export default withInstall({{fileName}})
+export { {{fileName}}, {{fileName}}View, {{fileName}}ViewModel }
+`,
   };
 
   const defaultView: FileTemplate = {
