@@ -83,7 +83,7 @@ export { {{fileName}}, {{fileName}}View, {{fileName}}ViewModel }
   };
 
   const defaultView: FileTemplate = {
-    templateName: "View",
+    templateName: "View 普通组件",
     files: [vueFile, vueModelFile, interfaceFile, indexFile],
   };
 
@@ -112,6 +112,10 @@ import { {{fileName}}EmitsType, {{fileName}}PropType } from './interface'
 
 /** {{fileName}} */
 export default class {{fileName}}ViewModel extends BaseViewModel<{{fileName}}EmitsType, {{fileName}}PropType> {
+  constructor(options: ViewModelOptions<{{fileName}}PropType>) {
+    super(options)
+  }
+  
   /** 加载完成函数 */
   viewDidMount() {}
 }
@@ -160,7 +164,7 @@ export { {{fileName}}, {{fileName}}View, {{fileName}}ViewModel }
   };
 
   const defaultView: FileTemplate = {
-    templateName: "ExtendView",
+    templateName: "ExtendView 继承组件",
     files: [vueFile, vueModelFile, interfaceFile, indexFile],
   };
 

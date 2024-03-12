@@ -45,11 +45,12 @@ const useExtension = async (args: any) => {
     return;
   }
 
-  const isPublic = await getIsPublicView();
+  // 默认为公共组件
+  //const isPublic = await getIsPublicView();
 
-  if (isPublic == undefined) {
-    return;
-  }
+  // if (isPublic == undefined) {
+  //   return;
+  // }
 
-  createFiles(selectPath, fileName, isPublic, template);
+  createFiles(selectPath, fileName, true, template);
 };
